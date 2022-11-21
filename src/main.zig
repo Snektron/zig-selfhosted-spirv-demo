@@ -193,7 +193,7 @@ fn main2() !void {
         const shader_module = try vkd.createShaderModule(dev, &.{
             .flags = .{},
             .code_size = rsrc.shader.len,
-            .p_code = @ptrCast([*]const u32, rsrc.shader),
+            .p_code = @ptrCast([*]const u32, &rsrc.shader),
         }, null);
         defer vkd.destroyShaderModule(dev, shader_module, null);
 

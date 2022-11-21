@@ -15,7 +15,7 @@ $(CACHEDIR)/main: src/main.zig $(CACHEDIR)/resources.zig $(CACHEDIR)/shader.spv
 
 $(CACHEDIR)/resources.zig:
 	@mkdir -p $(CACHEDIR)
-	@echo 'pub const shader align(4) = @embedFile("$(abspath $(CACHEDIR))/shader.spv");' > $@
+	@echo 'pub const shader align(@alignOf(u32)) = @embedFile("$(abspath $(CACHEDIR))/shader.spv").*;' > $@
 
 clean:
 	@rm -rf $(CACHEDIR) demo
