@@ -8,7 +8,7 @@ export fn shader() callconv(.C) void {
         \\%target = OpVariable %ImgPtr UniformConstant
         \\          OpDecorate %target DescriptorSet 0
         \\          OpDecorate %target Binding 0
-        : [target] "" (->*const addrspace(.uniform) Image),
+        : [target] "" (->*const Image),
     );
     const gid_ptr = asm volatile(
         \\     %U32 = OpTypeInt 32 0
@@ -16,7 +16,7 @@ export fn shader() callconv(.C) void {
         \\%V3U32Ptr = OpTypePointer Input %V3U32
         \\     %gid = OpVariable %V3U32Ptr Input
         \\            OpDecorate %gid BuiltIn GlobalInvocationId
-        : [gid] "" (->*const addrspace(.input) @Vector(3, u32)),
+        : [gid] "" (->*const @Vector(3, u32)),
     );
 
     const uv = @shuffle(u32, gid_ptr.*, undefined, @Vector(2, i32){0, 1});
